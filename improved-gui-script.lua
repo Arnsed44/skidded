@@ -8,14 +8,15 @@ if not game:IsLoaded() then
 end
 
 -- Main GUI
-local screenGui = Instance.new("ScreenGui", CoreGui)
+local screenGui = Instance.new("ScreenGui")
+screenGui.Parent = CoreGui
 screenGui.Name = "EnhancedGhostStatsGUI"
 screenGui.ResetOnSpawn = false
 
 -- Main Container
 local mainFrame = Instance.new("Frame")
-mainFrame.Size = UDim2.new(0, 440, 0, 65) -- INCREASED SIZE
-mainFrame.Position = UDim2.new(0.5, -220, 0.15, 0) -- INCREASED OFFSET
+mainFrame.Size = UDim2.new(0, 440, 0, 65)
+mainFrame.Position = UDim2.new(0.5, -220, 0.15, 0)
 mainFrame.BackgroundColor3 = Color3.fromRGB(15, 15, 20)
 mainFrame.BorderSizePixel = 0
 mainFrame.ClipsDescendants = true
@@ -24,11 +25,13 @@ mainFrame.Draggable = true
 mainFrame.Parent = screenGui
 
 -- Apply rounded corners
-local cornerRadius = Instance.new("UICorner", mainFrame)
+local cornerRadius = Instance.new("UICorner")
+cornerRadius.Parent = mainFrame
 cornerRadius.CornerRadius = UDim.new(0, 16)
 
--- Gradient background...
-local gradient = Instance.new("UIGradient", mainFrame)
+-- Gradient background
+local gradient = Instance.new("UIGradient")
+gradient.Parent = mainFrame
 gradient.Color = ColorSequence.new({
     ColorSequenceKeypoint.new(0, Color3.fromRGB(20, 20, 30)),
     ColorSequenceKeypoint.new(1, Color3.fromRGB(10, 10, 15))
@@ -36,17 +39,19 @@ gradient.Color = ColorSequence.new({
 gradient.Rotation = 45
 
 -- Add glow effect
-local glow = Instance.new("ImageLabel", mainFrame)
+local glow = Instance.new("ImageLabel")
+glow.Parent = mainFrame
 glow.Size = UDim2.new(1, 20, 1, 20)
 glow.Position = UDim2.new(0, -10, 0, -10)
 glow.BackgroundTransparency = 1
-glow.Image = "rbxassetid://5028857084" -- Glow asset
+glow.Image = "rbxassetid://5028857084"
 glow.ImageColor3 = Color3.fromRGB(90, 70, 255)
 glow.ImageTransparency = 0.8
 glow.ZIndex = -1
 
 -- Animated border
-local stroke = Instance.new("UIStroke", mainFrame)
+local stroke = Instance.new("UIStroke")
+stroke.Parent = mainFrame
 stroke.Thickness = 2.5
 stroke.Color = Color3.fromHSV(0, 1, 1)
 task.spawn(function()
@@ -59,44 +64,49 @@ task.spawn(function()
 end)
 
 -- Header with icon
-local headerContainer = Instance.new("Frame", mainFrame)
-headerContainer.Size = UDim2.new(1, 0, 0, 65) -- INCREASED HEIGHT
+local headerContainer = Instance.new("Frame")
+headerContainer.Parent = mainFrame
+headerContainer.Size = UDim2.new(1, 0, 0, 65)
 headerContainer.BackgroundTransparency = 1
 
-local ghostIcon = Instance.new("ImageLabel", headerContainer)
-ghostIcon.Size = UDim2.new(0, 40, 0, 40) -- INCREASED SIZE
-ghostIcon.Position = UDim2.new(0, 18, 0, 13) -- ADJUSTED POSITION
+local ghostIcon = Instance.new("ImageLabel")
+ghostIcon.Parent = headerContainer
+ghostIcon.Size = UDim2.new(0, 40, 0, 40)
+ghostIcon.Position = UDim2.new(0, 18, 0, 13)
 ghostIcon.BackgroundTransparency = 1
-ghostIcon.Image = "rbxassetid://3926307971" -- Roblox ghost icon
+ghostIcon.Image = "rbxassetid://3926307971"
 ghostIcon.ImageRectOffset = Vector2.new(364, 324)
 ghostIcon.ImageRectSize = Vector2.new(36, 36)
 ghostIcon.ImageColor3 = Color3.fromRGB(255, 255, 255)
 
-local title = Instance.new("TextLabel", headerContainer)
-title.Size = UDim2.new(1, -140, 0, 65) -- INCREASED WIDTH AND HEIGHT
-title.Position = UDim2.new(0, 65, 0, 0) -- ADJUSTED POSITION
+local title = Instance.new("TextLabel")
+title.Parent = headerContainer
+title.Size = UDim2.new(1, -140, 0, 65)
+title.Position = UDim2.new(0, 65, 0, 0)
 title.BackgroundTransparency = 1
 title.Text = "Ghost Stats"
 title.TextColor3 = Color3.fromRGB(255, 255, 255)
 title.Font = Enum.Font.GothamBold
-title.TextSize = 32 -- INCREASED FONT SIZE
+title.TextSize = 32
 title.TextXAlignment = Enum.TextXAlignment.Left
 
 -- Control buttons container
-local controlsContainer = Instance.new("Frame", headerContainer)
-controlsContainer.Size = UDim2.new(0, 90, 0, 40) -- INCREASED SIZE
-controlsContainer.Position = UDim2.new(1, -100, 0, 13) -- ADJUSTED POSITION
+local controlsContainer = Instance.new("Frame")
+controlsContainer.Parent = headerContainer
+controlsContainer.Size = UDim2.new(0, 90, 0, 40)
+controlsContainer.Position = UDim2.new(1, -100, 0, 13)
 controlsContainer.BackgroundTransparency = 1
 
 -- Minimize button with modern design
-local minimize = Instance.new("TextButton", controlsContainer)
-minimize.Size = UDim2.new(0, 40, 0, 40) -- INCREASED SIZE
+local minimize = Instance.new("TextButton")
+minimize.Parent = controlsContainer
+minimize.Size = UDim2.new(0, 40, 0, 40)
 minimize.Position = UDim2.new(1, -45, 0, 0)
 minimize.BackgroundColor3 = Color3.fromRGB(25, 25, 35)
 minimize.Text = "-"
 minimize.TextColor3 = Color3.fromRGB(255, 255, 255)
 minimize.Font = Enum.Font.GothamBold
-minimize.TextSize = 30 -- INCREASED FONT SIZE
+minimize.TextSize = 30
 minimize.AutoButtonColor = false
 
 -- Button hover effect
@@ -115,9 +125,10 @@ Instance.new("UICorner", minimize).CornerRadius = UDim.new(0, 8)
 Instance.new("UIStroke", minimize).Color = Color3.fromRGB(50, 50, 70)
 
 -- Content container for stats
-local contentContainer = Instance.new("Frame", mainFrame)
-contentContainer.Size = UDim2.new(1, -40, 1, -75) -- INCREASED SIZE
-contentContainer.Position = UDim2.new(0, 20, 0, 70) -- ADJUSTED POSITION
+local contentContainer = Instance.new("Frame")
+contentContainer.Parent = mainFrame
+contentContainer.Size = UDim2.new(1, -40, 1, -75)
+contentContainer.Position = UDim2.new(0, 20, 0, 70)
 contentContainer.BackgroundTransparency = 1
 
 -- Stat Labels with improved styling
@@ -132,40 +143,44 @@ local labels, yOffset = {}, 0
 
 -- Create styled stat panels instead of simple labels
 for statName, statValue in pairs(stats) do
-    local statPanel = Instance.new("Frame", contentContainer)
-    statPanel.Size = UDim2.new(1, 0, 0, 48) -- INCREASED HEIGHT
+    local statPanel = Instance.new("Frame")
+    statPanel.Parent = contentContainer
+    statPanel.Size = UDim2.new(1, 0, 0, 48)
     statPanel.Position = UDim2.new(0, 0, 0, yOffset)
     statPanel.BackgroundColor3 = Color3.fromRGB(20, 20, 30)
     statPanel.BackgroundTransparency = 0.6
     statPanel.Visible = false
 
-    local panelCorner = Instance.new("UICorner", statPanel)
+    local panelCorner = Instance.new("UICorner")
+    panelCorner.Parent = statPanel
     panelCorner.CornerRadius = UDim.new(0, 8)
 
-    local statLabel = Instance.new("TextLabel", statPanel)
+    local statLabel = Instance.new("TextLabel")
+    statLabel.Parent = statPanel
     statLabel.Size = UDim2.new(0.4, 0, 1, 0)
     statLabel.BackgroundTransparency = 1
     statLabel.Text = statName .. ":"
     statLabel.TextColor3 = Color3.fromRGB(170, 170, 255)
     statLabel.Font = Enum.Font.GothamMedium
-    statLabel.TextSize = 22 -- INCREASED FONT SIZE
+    statLabel.TextSize = 22
     statLabel.TextXAlignment = Enum.TextXAlignment.Left
 
-    local statValueLabel = Instance.new("TextLabel", statPanel)
+    local statValueLabel = Instance.new("TextLabel")
+    statValueLabel.Parent = statPanel
     statValueLabel.Size = UDim2.new(0.6, 0, 1, 0)
     statValueLabel.Position = UDim2.new(0.4, 0, 0, 0)
     statValueLabel.BackgroundTransparency = 1
     statValueLabel.Text = statValue
     statValueLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
     statValueLabel.Font = Enum.Font.GothamSemiBold
-    statValueLabel.TextSize = 22 -- INCREASED FONT SIZE
+    statValueLabel.TextSize = 22
     statValueLabel.TextXAlignment = Enum.TextXAlignment.Left
 
     labels[statName] = {panel = statPanel, value = statValueLabel}
-    yOffset += 58 -- INCREASED OFFSET
+    yOffset += 58
 end
 
--- Ghost Orbs detection...
+-- Ghost Orbs detection
 task.spawn(function()
     task.wait(5)
     local found = false
@@ -225,8 +240,9 @@ task.spawn(function()
     end
 
     -- Add temperature labels
-    local tempPanel = Instance.new("Frame", contentContainer)
-    tempPanel.Size = UDim2.new(1, 0, 0, 48) -- INCREASED HEIGHT
+    local tempPanel = Instance.new("Frame")
+    tempPanel.Parent = contentContainer
+    tempPanel.Size = UDim2.new(1, 0, 0, 48)
     tempPanel.Position = UDim2.new(0, 0, 0, yOffset)
     tempPanel.BackgroundColor3 = Color3.fromRGB(20, 20, 30)
     tempPanel.BackgroundTransparency = 0.6
@@ -234,30 +250,33 @@ task.spawn(function()
 
     Instance.new("UICorner", tempPanel).CornerRadius = UDim.new(0, 8)
 
-    local tempLabel = Instance.new("TextLabel", tempPanel)
+    local tempLabel = Instance.new("TextLabel")
+    tempLabel.Parent = tempPanel
     tempLabel.Size = UDim2.new(0.4, 0, 1, 0)
     tempLabel.BackgroundTransparency = 1
     tempLabel.Text = "Current Temp:"
     tempLabel.TextColor3 = Color3.fromRGB(170, 170, 255)
     tempLabel.Font = Enum.Font.GothamMedium
-    tempLabel.TextSize = 22 -- INCREASED FONT SIZE
+    tempLabel.TextSize = 22
     tempLabel.TextXAlignment = Enum.TextXAlignment.Left
 
-    local tempValueLabel = Instance.new("TextLabel", tempPanel)
+    local tempValueLabel = Instance.new("TextLabel")
+    tempValueLabel.Parent = tempPanel
     tempValueLabel.Size = UDim2.new(0.6, 0, 1, 0)
     tempValueLabel.Position = UDim2.new(0.4, 0, 0, 0)
     tempValueLabel.BackgroundTransparency = 1
     tempValueLabel.Text = "..."
     tempValueLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
     tempValueLabel.Font = Enum.Font.GothamSemiBold
-    tempValueLabel.TextSize = 22 -- INCREASED FONT SIZE
+    tempValueLabel.TextSize = 22
     tempValueLabel.TextXAlignment = Enum.TextXAlignment.Left
 
     labels["Current Temp"] = {panel = tempPanel, value = tempValueLabel}
-    yOffset += 58 -- INCREASED OFFSET
+    yOffset += 58
 
-    local favTempPanel = Instance.new("Frame", contentContainer)
-    favTempPanel.Size = UDim2.new(1, 0, 0, 48) -- INCREASED HEIGHT
+    local favTempPanel = Instance.new("Frame")
+    favTempPanel.Parent = contentContainer
+    favTempPanel.Size = UDim2.new(1, 0, 0, 48)
     favTempPanel.Position = UDim2.new(0, 0, 0, yOffset)
     favTempPanel.BackgroundColor3 = Color3.fromRGB(20, 20, 30)
     favTempPanel.BackgroundTransparency = 0.6
@@ -265,27 +284,29 @@ task.spawn(function()
 
     Instance.new("UICorner", favTempPanel).CornerRadius = UDim.new(0, 8)
 
-    local favTempLabel = Instance.new("TextLabel", favTempPanel)
+    local favTempLabel = Instance.new("TextLabel")
+    favTempLabel.Parent = favTempPanel
     favTempLabel.Size = UDim2.new(0.4, 0, 1, 0)
     favTempLabel.BackgroundTransparency = 1
     favTempLabel.Text = "Favorite Temp:"
     favTempLabel.TextColor3 = Color3.fromRGB(170, 170, 255)
     favTempLabel.Font = Enum.Font.GothamMedium
-    favTempLabel.TextSize = 22 -- INCREASED FONT SIZE
+    favTempLabel.TextSize = 22
     favTempLabel.TextXAlignment = Enum.TextXAlignment.Left
 
-    local favTempValueLabel = Instance.new("TextLabel", favTempPanel)
+    local favTempValueLabel = Instance.new("TextLabel")
+    favTempValueLabel.Parent = favTempPanel
     favTempValueLabel.Size = UDim2.new(0.6, 0, 1, 0)
     favTempValueLabel.Position = UDim2.new(0.4, 0, 0, 0)
     favTempValueLabel.BackgroundTransparency = 1
     favTempValueLabel.Text = "..."
     favTempValueLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
     favTempValueLabel.Font = Enum.Font.GothamSemiBold
-    favTempValueLabel.TextSize = 22 -- INCREASED FONT SIZE
+    favTempValueLabel.TextSize = 22
     favTempValueLabel.TextXAlignment = Enum.TextXAlignment.Left
 
     labels["Favorite Temp"] = {panel = favTempPanel, value = favTempValueLabel}
-    yOffset += 58 -- INCREASED OFFSET
+    yOffset += 58
 
     -- Room tracking loop
     while task.wait(1.5) do
@@ -308,11 +329,11 @@ task.spawn(function()
                 
                 -- Color coding based on temperature
                 if temp < 5 then
-                    labels["Current Temp"].value.TextColor3 = Color3.fromRGB(100, 200, 255) -- Cold blue
+                    labels["Current Temp"].value.TextColor3 = Color3.fromRGB(100, 200, 255)
                 elseif temp < 10 then
-                    labels["Current Temp"].value.TextColor3 = Color3.fromRGB(150, 255, 255) -- Cool cyan
+                    labels["Current Temp"].value.TextColor3 = Color3.fromRGB(150, 255, 255)
                 else
-                    labels["Current Temp"].value.TextColor3 = Color3.fromRGB(255, 255, 255) -- Normal white
+                    labels["Current Temp"].value.TextColor3 = Color3.fromRGB(255, 255, 255)
                 end
             end
 
@@ -331,11 +352,11 @@ task.spawn(function()
                         
                         -- Color coding based on temperature
                         if favTemp < 5 then
-                            labels["Favorite Temp"].value.TextColor3 = Color3.fromRGB(100, 200, 255) -- Cold blue
+                            labels["Favorite Temp"].value.TextColor3 = Color3.fromRGB(100, 200, 255)
                         elseif favTemp < 10 then
-                            labels["Favorite Temp"].value.TextColor3 = Color3.fromRGB(150, 255, 255) -- Cool cyan
+                            labels["Favorite Temp"].value.TextColor3 = Color3.fromRGB(150, 255, 255)
                         else
-                            labels["Favorite Temp"].value.TextColor3 = Color3.fromRGB(255, 255, 255) -- Normal white
+                            labels["Favorite Temp"].value.TextColor3 = Color3.fromRGB(255, 255, 255)
                         end
                     end
                 end
@@ -349,12 +370,12 @@ local minimized = true
 local function updateGui()
     local targetSize
     if minimized then
-        targetSize = UDim2.new(0, 440, 0, 65) -- INCREASED SIZE
+        targetSize = UDim2.new(0, 440, 0, 65)
         for _, statData in pairs(labels) do
             statData.panel.Visible = false
         end
     else
-        targetSize = UDim2.new(0, 440, 0, yOffset + 70) -- INCREASED SIZE
+        targetSize = UDim2.new(0, 440, 0, yOffset + 70)
         for _, statData in pairs(labels) do
             statData.panel.Visible = true
         end
@@ -391,6 +412,7 @@ task.spawn(function()
         hue = (hue + 0.005) % 1
     end
 end)
+
 
 -- Button Toggles GUI (Second GUI)
 -- Enhanced Button Toggles GUI
