@@ -1,6 +1,3 @@
--- Enhanced Ghost Stats UI by ChatGPT (based on original work)
--- Credits to the original author
-
 local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
 local CoreGui = game:GetService("CoreGui")
